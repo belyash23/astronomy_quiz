@@ -4,5 +4,8 @@ module.exports = {
       preProcessor: 'sass',
       patterns: []
     }
+  },
+  chainWebpack: config => {
+    config.module.rules.delete('eslint');
   }
 }
