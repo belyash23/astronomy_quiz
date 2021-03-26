@@ -60,7 +60,7 @@ export default {
   created() {
     this.nextQuestion();
   },
-  emits: ['ans'],
+  emits: ['ans', 'game-over'],
   components: {
     Answer
   }
