@@ -1,2 +1,13 @@
 @import '~Sass/normalize.sass'
 @import '~Sass/fonts.sass'
+
+.animated-gradient
+  &__background
+    transition: 1.2s ease-in-out 0.1s
+    background: red
+    background-clip: text
+    border-top-right-radius: 100%
+    border-bottom-right-radius: 100%
+    width: 0px
+    &:hover
+      width: 100%

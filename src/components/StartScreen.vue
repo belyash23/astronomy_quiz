@@ -1,7 +1,25 @@
 <template>
   <div class="screen start-screen" v-if="state === 'start'">
-    <button class="start-screen__start-button" @click="startGame">Начать</button>
-    <div class="start-screen__description">Главное всюду - начать; начало - важнейшая часть дел!</div>
+    <transition 
+      name="slide-start-button"
+      @after-enter="showDescription=true"
+    >
+      <button 
+        class="start-screen__start-button animated-gradient" 
+        @click="startGame" 
+        v-if="showStartButton"
+      >
+        <div class="animated-gradient__background">Начать</div>
+      </button>
+    </transition>
+    <transition name="slide-description">
+      <div 
+        class="start-screen__description" 
+        v-if="showDescription"
+      >
+        Главное всюду - начать; начало - важнейшая часть дел!
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -13,17 +31,18 @@
   background: url('~Assets/start-screen.png') center
   background-size: cover
   &__start-button
-    display: block
     font-family: Sensei
     outline: none
     border: none
-    background: none
-    color: hsl(102, 63%, 60%)
+    background: hsl(102, 63%, 60%)
+    background-clip: text
+    width: 400px
+    color: transparent
     font-size: 6em
-    margin: 35vh auto 0px auto
-    width: 200px
+    margin-top: 35vh
     text-align: center
     margin-left: 80px
+    transition: 1s
   &__description
     margin-top: 30px
     font-family: Capsmall
@@ -32,12 +51,32 @@
     max-width: 1000px
     text-alin: center
     margin-left: 150px
-    
+
+.slide-start-button-enter-active
+  transition: all 1s ease-out
+  opacity: 1
+.slide-start-button-enter-from
+  opacity: 0
+  transform: translateY(-100px)
+
+.slide-description-enter-active
+  transition: all 1s ease-out
+  opacity: 1
+.slide-description-enter-from
+  opacity: 0
+  transform: translateY(100px)
 </style>
 
 <script>
 export default {
   name: 'StartScreen',
+  data() {
+    return {
+      show: true,
+      showStartButton: false,
+      showDescription: false
+    }
+  },
   props: {
     'state': String
   },
@@ -46,6 +85,10 @@ export default {
     startGame() {
       this.$emit('start-game');
     }
+  },
+  mounted() {
+    setTimeout(() => this.showStartButton = true, 500, this)
   }
+
 }
 </script>
