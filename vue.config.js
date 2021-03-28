@@ -16,6 +16,7 @@ module.exports = {
         Assets: path.resolve(__dirname, './src/assets/'),
         Components: path.resolve(__dirname, './src/components/'),
         Js: path.resolve(__dirname, './src/js/'),
+        Quizzes: path.resolve(__dirname, './src/quizzes/'),
         Sass: path.resolve(__dirname, './src/sass/'),
         CommonSass: path.resolve(__dirname, './src/sass/common.sass')
       }

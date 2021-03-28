@@ -6,7 +6,7 @@
     >
       <button 
         class="start-screen__start-button animated-gradient" 
-        @click="startGame" 
+        @click="start" 
         v-if="showStartButton"
       >
         <div class="animated-gradient__background">Начать</div>
@@ -26,10 +26,7 @@
 <style lang="sass">
 @import '~CommonSass'
 .start-screen
-  overflow: auto
-  height: 100vh
-  background: url('~Assets/start-screen.png') center
-  background-size: cover
+  background-image: url('~Assets/start-screen.png')
   &__start-button
     font-family: Sensei
     outline: none
@@ -80,10 +77,10 @@ export default {
   props: {
     'state': String
   },
-  emits: ['start-game'],
+  emits: ['start'],
   methods: {
-    startGame() {
-      this.$emit('start-game');
+    start() {
+      this.$emit('start');
     }
   },
   mounted() {
