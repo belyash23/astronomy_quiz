@@ -16,9 +16,11 @@
   border: none
   outline: none
   background: none
+  display: block
+  margin: auto
   &__img
     max-height: 250px
-    border: 1px solid white
+    border: 2px solid white
     border-radius: 20px
   &__text
     color: #ffffff

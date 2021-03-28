@@ -1,12 +1,15 @@
 <template>
   <div class="screen choose-screen" v-if="state === 'chooseQuiz'">
     <div class="quizzes">
-      <quiz-miniature
+      <div class="quizzes__container" 
         v-for="quiz in quizzes" 
         :key="quiz.title"
-        :quiz="quiz"
-        @quiz-selected="quizSelected"
-      />
+      >
+        <quiz-miniature
+          :quiz="quiz"
+          @quiz-selected="quizSelected"
+        />
+      </div>
     </div>
 
     <div class="choose-screen__title">
@@ -57,9 +60,12 @@ text
   transform: translateY(4px)
 .quizzes
   display: flex
-  max-width: 70vw
+  max-width: 95vw
   margin: 50px auto 0px auto
   justify-content: space-between
+  transform: translateX(-50px)
+  &__container
+    flex-grow: 1
 </style>
 
 <script>
