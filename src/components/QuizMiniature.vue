@@ -9,7 +9,7 @@
   </button>
 </template>
 
-<style lang="sass">
+<style scoped lang="sass">
 @import '~CommonSass'
 
 .quiz-miniature
@@ -28,6 +28,7 @@
     margin-top: 10px
     font-size: 2em
     text-align: center
+    text-shadow: 2px 2px #000000
 </style>
 
 <script>

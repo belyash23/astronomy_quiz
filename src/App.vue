@@ -10,7 +10,6 @@
   />
   <stage
     :quiz="selectedQuiz"
-    :questions="questions" 
     :state="state" 
     @ans="sendAnswer" 
     @game-over="showRating"
@@ -26,14 +25,12 @@ import Stage from './components/Stage.vue'
 import Rating from './components/Rating.vue'
 import StartScreen from 'Components/StartScreen.vue'
 import ChooseScreen from 'Components/ChooseScreen.vue'
-import questions from './js/questions.js'
 import quizzes from 'Js/getQuizzes.js'
 
 export default {
   name: 'App',
   data() {
     return {
-      questions: questions,
       score: 0,
       state: 'start',
       quizzes: quizzes,
@@ -41,8 +38,9 @@ export default {
     }
   },
   methods: {
-    sendAnswer(correct) {
-      if(correct) this.score++
+    sendAnswer(e) {
+      if(e.correct) this.score += e.difficult
+      console.log(e)
     },
     showRating() {
       this.state = 'game-over';

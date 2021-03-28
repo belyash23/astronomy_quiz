@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<style lang="sass">
+<style scoped lang="sass">
 @import '~CommonSass'
 .choose-screen 
   background-image: url('~Assets/choose-quiz-screen-background.jpg')

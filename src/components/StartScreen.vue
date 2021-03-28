@@ -48,6 +48,7 @@
     max-width: 1000px
     text-alin: center
     margin-left: 150px
+    text-shadow: 2px 2px #000000
 
 .slide-start-button-enter-active
   transition: all 1s ease-out
