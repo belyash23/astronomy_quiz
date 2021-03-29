@@ -1,8 +1,8 @@
 export default {
   name: 'earth',
   title: 'Планета Земля',
-  background: require('./background.jpeg'),
-  miniature: require('./background.jpeg'),
+  background: require('./background.jpg'),
+  miniature: require('./background.jpg'),
   questions: [
     {
       question: '1+2=',

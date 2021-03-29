@@ -68,8 +68,9 @@ export default {
     }
   },
   props: {
-    'state': String,
-    'quiz': false
+    state: String,
+    quiz: false,
+    mustRestart: Boolean
   },
   methods: {
     nextQuestionIndex() {
@@ -90,13 +91,13 @@ export default {
     nextQuestion() {
       if(this.stageNum === this.maxQuestions) {
         this.$emit('game-over');
+        this.clearData();
         return
       }
       this.stageNum += 1
       const nextQuestionIndex = this.nextQuestionIndex();
       this.question = this.quiz.questions[nextQuestionIndex];
       this.passed.push(nextQuestionIndex);
-      // console.log(this.question.difficult, this.difficulties)
       this.difficulties[this.question.difficult].count += 1
       this.shuffleAnswers();
     },
@@ -112,18 +113,39 @@ export default {
       }
     },
     sendAnswer(correct) {
-      this.nextQuestion();
       this.$emit('ans', {correct: correct, difficult: this.question.difficult});
+      this.nextQuestion();
+    },
+    clearData() {
+      this.stageNum = 0;
+      for(let key in this.difficulties) {
+        this.difficulties[key].count = 0;
+      }
+      this.passed = [];
+    },
+    restart() {
+      this.clearData();
+      this.nextQuestion()
     }
   },
   watch: {
     quiz: function() {
       if (this.quiz) {
-        this.nextQuestion()
+        this.nextQuestion();
+      }
+    },
+    mustRestart: {
+      immediate: true,
+      handler() {
+        if(this.mustRestart) {
+          this.$emit('restarted')
+          this.clearData();
+          this.restart();
+        }
       }
     }
   },
-  emits: ['ans', 'game-over'],
+  emits: ['ans', 'game-over', 'restarted'],
   components: {
     Answer, ShiftedText
   }

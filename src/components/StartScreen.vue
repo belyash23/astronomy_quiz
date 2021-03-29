@@ -26,7 +26,7 @@
 <style lang="sass">
 @import '~CommonSass'
 .start-screen
-  background-image: url('~Assets/start-screen.png')
+  background-image: url('~Assets/start-screen.jpg')
   &__start-button
     font-family: Sensei
     outline: none

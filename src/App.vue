@@ -10,13 +10,18 @@
   />
   <stage
     :quiz="selectedQuiz"
-    :state="state" 
+    :state="state"
+    :mustRestart="mustRestart"
     @ans="sendAnswer" 
     @game-over="showRating"
+    @restarted="mustRestart=false"
   />
   <rating 
     :state="state" 
-    :score="score" 
+    :score="score"
+    :maxScore="maxScore"
+    @end-game="endGame"
+    @restart="restart"
   />
 </template>
 
@@ -34,13 +39,14 @@ export default {
       score: 0,
       state: 'start',
       quizzes: quizzes,
-      selectedQuiz: false
+      selectedQuiz: false,
+      maxScore: 17,
+      mustRestart: false
     }
   },
   methods: {
     sendAnswer(e) {
       if(e.correct) this.score += e.difficult
-      console.log(e)
     },
     showRating() {
       this.state = 'game-over';
@@ -48,6 +54,17 @@ export default {
     startQuiz(name) {
       this.state = 'playing'
       this.selectedQuiz = quizzes[name]
+    },
+    endGame() {
+      this.selectedQuiz = false;
+      this.score = 0;
+      this.state = "start";
+
+    },
+    restart() {
+      this.score = 0;
+      this.state="playing"
+      this.mustRestart = true;
     }
   },
   components: {
