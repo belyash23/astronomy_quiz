@@ -1,12 +1,15 @@
 <template>
-  <div class="screen start-screen" v-if="state === 'start'">
+  <div class="screen start-screen" v-if="showStartScreen">
+    <transition name="fade-start-screen-background">
+      <img class="screen__background start-screen__background" src="~Assets/start-screen.jpg" v-if="showBackground">
+    </transition>
     <transition 
       name="slide-start-button"
       @after-enter="showDescription=true"
     >
       <button 
         class="start-screen__start-button animated-gradient" 
-        @click="start" 
+        @click="removeButtons" 
         v-if="showStartButton"
       >
         <div class="animated-gradient__background">Начать</div>
@@ -26,8 +29,8 @@
 <style lang="sass">
 @import '~CommonSass'
 .start-screen
-  background-image: url('~Assets/start-screen.jpg')
   &__start-button
+    position: relative
     font-family: Sensei
     outline: none
     border: none
@@ -41,6 +44,7 @@
     margin-left: 80px
     transition: 1s
   &__description
+    position: relative
     margin-top: 30px
     font-family: Capsmall
     color: hsl(169, 100%, 50%)
@@ -50,19 +54,40 @@
     margin-left: 150px
     text-shadow: 2px 2px #000000
 
-.slide-start-button-enter-active
-  transition: all 1s ease-out
-  opacity: 1
-.slide-start-button-enter-from
-  opacity: 0
-  transform: translateY(-100px)
+.slide-start-button
+  &-enter-active
+    transition: all 1s ease-out
+    opacity: 1
+  &-enter-from
+    opacity: 0
+    transform: translateY(-100px)
+  &-leave-active
+    transition: all 0.5s ease-in
+    opacity: 1
+  &-leave-to
+    opacity: 0
+    transform: translateY(-100px)
 
-.slide-description-enter-active
-  transition: all 1s ease-out
-  opacity: 1
-.slide-description-enter-from
-  opacity: 0
-  transform: translateY(100px)
+.slide-description
+  &-enter-active
+    transition: all 1s ease-out
+    opacity: 1
+  &-enter-from
+    opacity: 0
+    transform: translateY(100px)
+  &-leave-active
+    transition: all 0.5s ease-in
+    opacity: 1
+  &-leave-to
+    opacity: 0
+    transform: translateY(100px)
+
+.fade-start-screen-background
+  &-leave-active
+    transition: all 1s ease-in
+    opacity: 1
+  &-leave-to
+    opacity: 0
 </style>
 
 <script>
@@ -70,9 +95,10 @@ export default {
   name: 'StartScreen',
   data() {
     return {
-      show: true,
       showStartButton: false,
-      showDescription: false
+      showDescription: false,
+      showBackground: true,
+      showStartScreen: true
     }
   },
   props: {
@@ -80,12 +106,27 @@ export default {
   },
   emits: ['start'],
   methods: {
-    start() {
-      this.$emit('start');
+    removeButtons() {
+      this.showStartButton = false;
+      this.showDescription = false;
+      this.showBackground = false;
+      this.$emit('start')
     }
   },
-  mounted() {
-    setTimeout(() => this.showStartButton = true, 500, this)
+  watch: {
+    state: {
+      immediate: true,
+      handler() {
+        if(this.state === 'start') {
+          this.showBackground = true;
+          this.showStartScreen = true;
+          setTimeout(() => this.showStartButton = true, 500, this)
+        }
+        else {
+          setTimeout(() => this.showStartScreen = false, 1000)
+        }
+      }
+    }
   }
 
 }

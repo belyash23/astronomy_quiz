@@ -1,12 +1,10 @@
 <template>
-  <start-screen 
+  <rating 
     :state="state" 
-    @start="state='chooseQuiz'"
-  />
-  <choose-screen 
-    :state="state"
-    :quizzes="quizzes"
-    @quiz-selected="startQuiz"
+    :score="score"
+    :maxScore="maxScore"
+    @end-game="endGame"
+    @restart="restart"
   />
   <stage
     :quiz="selectedQuiz"
@@ -16,13 +14,16 @@
     @game-over="showRating"
     @restarted="mustRestart=false"
   />
-  <rating 
-    :state="state" 
-    :score="score"
-    :maxScore="maxScore"
-    @end-game="endGame"
-    @restart="restart"
+  <choose-screen 
+    :state="state"
+    :quizzes="quizzes"
+    @quiz-selected="startQuiz"
   />
+  <start-screen 
+    :state="state" 
+    @start="start"
+  />
+
 </template>
 
 <script>
@@ -38,6 +39,7 @@ export default {
     return {
       score: 0,
       state: 'start',
+      screen: 'start-screen',
       quizzes: quizzes,
       selectedQuiz: false,
       maxScore: 17,
@@ -45,6 +47,9 @@ export default {
     }
   },
   methods: {
+    start() {
+      this.state= 'chooseQuiz'
+    },
     sendAnswer(e) {
       if(e.correct) this.score += e.difficult
     },
@@ -52,14 +57,13 @@ export default {
       this.state = 'game-over';
     },
     startQuiz(name) {
-      this.state = 'playing'
+      this.state = 'playing';
       this.selectedQuiz = quizzes[name]
     },
     endGame() {
       this.selectedQuiz = false;
       this.score = 0;
       this.state = "start";
-
     },
     restart() {
       this.score = 0;

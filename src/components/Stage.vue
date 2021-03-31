@@ -1,19 +1,30 @@
 <template>
   <div class="screen stage" 
-    v-if="state === 'playing'"
-    :style="{backgroundImage: `url(${quiz.background})`}"
-  >
-      <div class="stage__num">{{ stageNum }} / {{ maxQuestions }}</div><br>
-      <shifted-text class="stage__question"
-        :text="question.question"
-      />
-      <div class="stage__answers">
+    v-if="showScreen"
+  > 
+    <transition name="fade-background">
+      <img :src="quiz.background" alt="" class="screen__background" v-if="showBackground">
+    </transition>
+    <transition name="slide-content-up">
+      <div class="stage__num" v-if="showContent">{{ stageNum }} / {{ maxQuestions }}</div>
+    </transition>
+    <transition name="slide-content-up" >
+      <div class="stage__question-container" v-if="showContent">
+        <shifted-text class="stage__question"
+          :text="question.question"
+        />
+      </div>
+    </transition>
+    <transition name="slide-content-down">
+      <div class="stage__answers" v-if="showContent">
         <answer class="answer" 
           @ans="sendAnswer" v-for="answer in question.answers" 
           :key="answer.title" 
           :answer="answer"
+          :wrongAnswer="wrongAnswer"
         />
       </div>
+    </transition>
   </div>
 </template>
 
@@ -21,6 +32,8 @@
 @import '~CommonSass'
 .stage
   &__num
+    z-index: 1
+    position: relative
     margin-top: 20px
     margin-left: 30px
     font-size: 3.5em
@@ -37,6 +50,29 @@
   justify-content: space-between
   :nth-child(2)
     margin-top: -150px
+
+.slide
+  &-content
+    &-up
+      &-leave-active
+        transition: all 0.5s ease-in
+        opacity: 1
+      &-leave-to
+        opacity: 0
+        transform: translateY(-100px)
+    &-down
+      &-leave-active
+        transition: all 0.5s ease-in
+        opacity: 1
+      &-leave-to
+        opacity: 0
+        transform: translateY(100px)
+.fade-background
+  &-leave-active
+    transition: all 1s ease-in
+    opacity: 1
+  &-leave-to
+    opacity: 0
 </style>
   
 <script>
@@ -65,6 +101,10 @@ export default {
       passed: [],
       question: null,
       maxQuestions: 5,
+      wrongAnswer: false,
+      showContent: false,
+      showBackground: false,
+      showScreen: false
     }
   },
   props: {
@@ -89,9 +129,9 @@ export default {
       return nextQuestionIndex;
     },
     nextQuestion() {
+      this.wrongAnswer = false
       if(this.stageNum === this.maxQuestions) {
-        this.$emit('game-over');
-        this.clearData();
+        this.gameOver()
         return
       }
       this.stageNum += 1
@@ -113,8 +153,11 @@ export default {
       }
     },
     sendAnswer(correct) {
+      if(!correct) {
+        this.wrongAnswer = true;
+      }
       this.$emit('ans', {correct: correct, difficult: this.question.difficult});
-      this.nextQuestion();
+      setTimeout(this.nextQuestion, 1000)
     },
     clearData() {
       this.stageNum = 0;
@@ -126,6 +169,12 @@ export default {
     restart() {
       this.clearData();
       this.nextQuestion()
+    },
+    gameOver() {
+      this.showContent = false;
+      this.showBackground = false;
+      this.$emit('game-over');
+      this.clearData();
     }
   },
   watch: {
@@ -141,6 +190,19 @@ export default {
           this.$emit('restarted')
           this.clearData();
           this.restart();
+        }
+      }
+    },
+    state: {
+      immediate: true,
+      handler() {
+        if(this.state === 'playing') {
+          this.showBackground = true;
+          this.showScreen = true;
+          this.showContent = true;
+        }
+        else {
+          setTimeout(() => this.showScreen = false, 1000)
         }
       }
     }
