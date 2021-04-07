@@ -9,10 +9,10 @@
       <div class="stage__num" v-if="showContent">{{ stageNum }} / {{ maxQuestions }}</div>
     </transition>
     <transition name="slide-content-up" >
-      <div class="stage__question-container" v-if="showContent">
-        <shifted-text class="stage__question"
+      <div class="stage__question-container" v-if="showContent"><p>{{ question.question }}</p>
+        <!-- <shifted-text class="stage__question"
           :text="question.question"
-        />
+        /> -->
       </div>
     </transition>
     <transition name="slide-content-down">
@@ -40,12 +40,17 @@
     font-family: Sensei
     color: hsl(0, 100%, 67%)
     text-shadow: 0px 0px 5px black
-  &__question
-    margin-top: -70px
-    fill: hsl(0, 100%, 54%)
+  &__question-container
+    color: hsl(0, 100%, 54%)
+    z-index: 1
+    position: relative
+    font-size: 3em
+    text-shadow: 1px 1px 5px black
     font-family: Sensei
+    width: 100vw
+    text-align: center
 .stage__answers
-  margin: 140px auto 0px auto
+  margin: 200px auto 0px auto
   width: 90vw
   display: flex
   flex-wrap: wrap
@@ -103,21 +108,21 @@ export default {
       stageNum: 0,
       difficulties: {
         1: {
-          max: 3,
+          max: 5,
           count: 0
         },
         2: {
-          max: 1,
+          max: 3,
           count: 0
         },
         3: {
-          max: 1,
+          max: 2,
           count: 0
         }
       },
       passed: [],
       question: null,
-      maxQuestions: 5,
+      maxQuestions: 10,
       wrongAnswer: false,
       showContent: false,
       showBackground: false,

@@ -222,9 +222,9 @@ export default {
                         this.fireworks1 = new Fireworks({
               target: document.querySelector('.fireworks-right'),
               hue: 120,
-              startDelay: 1,
-              minDelay: 30,
-              maxDelay: 40,
+              startDelay: 5,
+              minDelay: 25,
+              maxDelay: 45,
               speed: 5,
               acceleration: 1.15,
               friction: 0.88,
