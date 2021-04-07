@@ -1,9 +1,14 @@
 <template>
   <button class="quiz-miniature" 
     @click = 'selectQuiz'
+
   >
     <img  alt="" class="quiz-miniature__img" 
       :src="quiz.miniature"
+      :style="{
+        height: maxHeight,
+        width: maxHeight
+      }"
     >
     <div class="quiz-miniature__text">{{ quiz.title }}</div>
   </button>
@@ -19,9 +24,9 @@
   display: block
   margin: auto
   &__img
-    max-height: 250px
     border: 2px solid white
     border-radius: 20px
+    object-fit: cover
   &__text
     color: #ffffff
     font-family: Capsmall
@@ -39,7 +44,11 @@ export default {
     }
   },
   props: {
-    'quiz': Object
+    quiz: Object,
+    maxHeight: {
+      type: String,
+      default: "150px"
+    }
   },
   methods: {
     selectQuiz(name) {

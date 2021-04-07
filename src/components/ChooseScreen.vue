@@ -11,6 +11,7 @@
         >
           <quiz-miniature
             :quiz="quiz"
+            :maxHeight="quizMiniatureMaxHeight"
             @quiz-selected="quizSelected"
           />
         </div>
@@ -19,7 +20,7 @@
 
     <transition name="slide-choose-screen__title">
       <div class="choose-screen__title" v-if="showContent">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 100 10">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 100 20">
           <path id="curve" d="m 0 20 c 4 -2 25 -10 50 -10 c 25 0 46 8 50 10" stroke-width="0.1"/>
           <text width="600">
             <textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">
@@ -27,7 +28,7 @@
             </textPath>
           </text>
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 100 10" class="choose-screen__title_shift">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 100 20" class="choose-screen__title_shift">
           <path id="curve" d="m 0 20 c 4 -2 25 -10 50 -10 c 25 0 46 8 50 10"  stroke-width="0.1"/>
           <text width="600">
             <textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">
@@ -37,39 +38,68 @@
         </svg>
       </div>
     </transition>
+    <transition name="slide-choose-screen__title">
+      <div class="choose-screen__title_straight" v-if="showContent">
+        <shifted-text class="stage__question"
+          :text="'ВЫБЕРИТЕ ВИКТОРИНУ'"
+          :shiftRight="'3px'"
+          :shiftBottom="'3px'"
+        />
+      </div>
+    </transition>
   </div>
 </template>
 
 <style scoped lang="sass">
 @import '~CommonSass'
-.choose-screen 
+.choose-screen
+  overflow: none
   &__title
     margin: 25vh auto 0px auto
-    font-size: 35%
+    font-size: calc(14px - 0.6vw)
     font-family: Sensei
     text-transform: uppercase
     max-width: 90vw
     transform: translate(2%)
+    @media screen and (min-width: 1400px)
+      font-size: 35%
+    @media screen and (max-height: 580px)
+      margin-top: 15vh
+    @media screen and (max-height: 460px)
+      display: none
+    &_straight
+      display: none
+      fill: hsl(0, 100%, 54%)
+      @media screen and (max-height: 460px)
+        display: block
+        font-family: Sensei
+        font-size: 0.7em
+        margin-top: -25px
     &_shift
       position: absolute
       right: 0.4%
       bottom: 0.4%
       text
         stroke: hsl(0, 0%, 100%)
-        stroke-width: 0.1px
+        stroke-width: 0.15px
         fill: transparent
 path
   fill: transparent
   stroke: none
 text
   fill: hsl(0, 100%, 54%)
-  transform: translateY(4px)
+  transform: translateY(7px)
 .quizzes
   display: flex
   max-width: 95vw
   margin: 50px auto 0px auto
   justify-content: space-between
-  transform: translateX(-50px)
+  z-index: 1
+  position: relative
+  @media screen and (max-width: 1000px)
+    font-size: 0.8em
+  @media screen and (max-height: 520px)
+    margin-top: 10px
   &__container
     flex-grow: 1
 
@@ -98,6 +128,7 @@ text
 
 <script>
 import QuizMiniature from 'Components/QuizMiniature.vue'
+import ShiftedText from 'Components/ShiftedText.vue'
 
 export default {
   name: 'ChooseScreen',
@@ -105,7 +136,8 @@ export default {
     return {
       showContent: false,
       showChooseScreen: false,
-      showBackground: false
+      showBackground: false,
+      quizMiniatureMaxHeight: '250px'
     }
   },
   props: {
@@ -120,7 +152,7 @@ export default {
     }
   },
   components: {
-    QuizMiniature
+    QuizMiniature, ShiftedText
   },
   watch: {
     state: {
@@ -136,6 +168,22 @@ export default {
         }
       }
     }
+  },
+  created() {
+    if(window.innerWidth <= 1000) {
+      this.quizMiniatureMaxHeight = '200px'
+    }
+    else {
+      this.quizMiniatureMaxHeight = '250px'
+    }
+    window.addEventListener('resize', function() {
+      if(window.innerWidth <= 1000) {
+        this.quizMiniatureMaxHeight = '200px'
+      }
+      else {
+        this.quizMiniatureMaxHeight = '250px'
+      }
+    }.bind(this))
   }
 }
 </script>

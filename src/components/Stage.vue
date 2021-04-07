@@ -17,7 +17,7 @@
     </transition>
     <transition name="slide-content-down">
       <div class="stage__answers" v-if="showContent">
-        <answer class="answer" 
+        <answer class="answer stage__answer" 
           @ans="sendAnswer" v-for="answer in question.answers" 
           :key="answer.title" 
           :answer="answer"
@@ -40,16 +40,31 @@
     font-family: Sensei
     color: hsl(0, 100%, 67%)
   &__question
+    margin-top: -70px
     fill: hsl(0, 100%, 54%)
     font-family: Sensei
-    font-size: 3em
 .stage__answers
-  margin: 200px auto 0px auto
+  margin: 140px auto 0px auto
   width: 90vw
   display: flex
+  flex-wrap: wrap
   justify-content: space-between
+  @media screen and (max-width: 1200px)
+    margin-top: 0px
+    width: 95vw
+    &:after
+      content:''
+      width:100%
+      order:0
   :nth-child(2)
     margin-top: -150px
+    @media screen and (max-width: 1200px)
+      margin-top: 0px
+  :nth-child(3)
+    @media screen and (max-width: 1200px)
+      order: 1
+.stage__answer
+  margin: auto
 
 .slide
   &-content
@@ -171,6 +186,7 @@ export default {
       this.nextQuestion()
     },
     gameOver() {
+      console.log(2)
       this.showContent = false;
       this.showBackground = false;
       this.$emit('game-over');
@@ -197,12 +213,14 @@ export default {
       immediate: true,
       handler() {
         if(this.state === 'playing') {
+          document.documentElement.style.overflowY = 'auto'
           this.showBackground = true;
           this.showScreen = true;
           this.showContent = true;
         }
         else {
           setTimeout(() => this.showScreen = false, 1000)
+          document.documentElement.style.overflow = 'hidden'
         }
       }
     }

@@ -20,7 +20,7 @@
         class="start-screen__description" 
         v-if="showDescription"
       >
-        Главное всюду - начать; начало - важнейшая часть дел!
+        Главное всюду - начать; <br>начало - важнейшая часть дел!
       </div>
     </transition>
   </div>
@@ -41,8 +41,10 @@
     font-size: 6em
     margin-top: 35vh
     text-align: center
-    margin-left: 80px
+    margin-left: 4vw
     transition: 1s
+    @media screen and (max-height: 450px)
+      margin-top: 20vh
   &__description
     position: relative
     margin-top: 30px
@@ -51,9 +53,10 @@
     font-size: 3em
     max-width: 1000px
     text-alin: center
-    margin-left: 150px
+    margin-left: 7.5vw
     text-shadow: 2px 2px #000000
-
+    @media screen and (max-width: 860px)
+      font-size: 2.5em
 .slide-start-button
   &-enter-active
     transition: all 1s ease-out

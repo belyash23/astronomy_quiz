@@ -38,7 +38,6 @@
         >
           <shifted-text class="rating__buttons-text" 
             text="Завершить" 
-            shiftBottom="18px"
           />
         </button>
         <button 
@@ -46,7 +45,6 @@
         >
           <shifted-text class="rating__buttons-text" 
             text="Начать заново"
-            shiftBottom="18px"
           />
         </button>
       </div>
@@ -54,12 +52,12 @@
   </div>
 </template>
 
-<style lang="sass">
+<style scoped lang="sass">
 .rating
   position: relative
   &__stars
     position: relative
-    z-index: 1
+    z-index: 0
     width: 345px
     display: flex
     flex-wrap: wrap
@@ -69,10 +67,16 @@
       margin-top: -145px
       width: 150px
   &__title
+    max-width: 450px
+    margin: 50px auto 0px auto
     fill: hsl(0, 100%, 54%)
     font-family: Sensei
-    font-size: 3em
-    margin-top: -240px
+    font-size: 0.9em
+    margin-top: -200px
+    @media screen and (max-width: 720px)
+      font-size: 0.8em
+    @media screen and (max-height: 360px)
+      margin-top: -220px
   &__score
     font-family: Capsmall
     font-size: 3em
@@ -83,20 +87,31 @@
     text-align: center
     position: relative
     z-index: 1
+    @media screen and (max-height: 420px)
+      margin-top: 0px
+    @media screen and (max-height: 360px)
+      margin-top: -20px
+    @media screen and (max-width: 720px)
+      font-size: 2.5em
   &__buttons
     position: absolute
     bottom: 50px
     display: flex
     width: 100vw
-    justify-content: space-between
+    justify-content: space-around
     font-family: Sensei
+    @media screen and (max-height: 480px)
+      bottom: 10px
+    @media screen and (max-height: 360px)
+      bottom: 5px
     button
+      width: 300px
       background: none
       border: none
       outline: none
     &-text
       fill: hsl(146, 100%, 25%)
-      font-size: 4em
+      font-size: 0.9em
 .star 
   width: 100px
 

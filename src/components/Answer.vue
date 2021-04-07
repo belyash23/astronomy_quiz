@@ -30,7 +30,7 @@
     font-family: Capsmall
     hyphens: auto
     word-wrap: break-word
-    height: 100%
+    height: 90%
     text-align: center
     &:before
       content: ""
