@@ -31,7 +31,7 @@ export default {
           correct: false
         },
         {
-          aswer: 'Форму эллипса',
+          answer: 'Форму эллипса',
           correct: false
         },
         {
@@ -49,7 +49,7 @@ export default {
           correct: false
         },
         {
-          aswer: 'Гидросфера',
+          answer: 'Гидросфера',
           correct: true
         },
         {
@@ -67,7 +67,7 @@ export default {
           correct: true
         },
         {
-          aswer: 'Гидросфера',
+          answer: 'Гидросфера',
           correct: false
         },
         {
@@ -85,7 +85,7 @@ export default {
           correct: false
         },
         {
-          aswer: '83%',
+          answer: '83%',
           correct: false
         },
         {
@@ -103,7 +103,7 @@ export default {
           correct: false
         },
         {
-          aswer: '4 * 1030 кг',
+          answer: '4 * 1030 кг',
           correct: false
         },
         {
@@ -121,7 +121,7 @@ export default {
           correct: true
         },
         {
-          aswer: 'Солнечный эффект',
+          answer: 'Солнечный эффект',
           correct: false
         },
         {
@@ -139,7 +139,7 @@ export default {
           correct: true
         },
         {
-          aswer: '20 °С',
+          answer: '20 °С',
           correct: false
         },
         {
@@ -157,7 +157,7 @@ export default {
           correct: false
         },
         {
-          aswer: '6378 км',
+          answer: '6378 км',
           correct: true
         },
         {
@@ -175,7 +175,7 @@ export default {
           correct: false
         },
         {
-          aswer: '5520 кг/см3',
+          answer: '5520 кг/см3',
           correct: true
         },
         {
@@ -193,7 +193,7 @@ export default {
           correct: false
         },
         {
-          aswer: 'На 100 °С',
+          answer: 'На 100 °С',
           correct: false
         },
         {
@@ -211,7 +211,7 @@ export default {
           correct: true
         },
         {
-          aswer: '8 -12 км',
+          answer: '8 -12 км',
           correct: false
         },
         {
@@ -229,7 +229,7 @@ export default {
           correct: false
         },
         {
-          aswer: 'В жидком',
+          answer: 'В жидком',
           correct: false
         },
         {
@@ -247,7 +247,7 @@ export default {
           correct: false
         },
         {
-          aswer: '3,420 %',
+          answer: '3,420 %',
           correct: false
         },
         {
@@ -265,7 +265,7 @@ export default {
           correct: false
         },
         {
-          aswer: 'На севере Исландии',
+          answer: 'На севере Исландии',
           correct: false
         },
         {
