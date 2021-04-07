@@ -3,6 +3,8 @@
     <transition name="fade-background">
       <img  class="screen__background" src="~Assets/rating-background.jpg" v-if="showBackground">
     </transition>
+    <div class="fireworks fireworks-left"></div>
+    <div class="fireworks fireworks-right"></div>
     <transition name="slide-content-up">
       <div class="rating__stars" v-if="showContent">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -14 28 28" class="star">
@@ -114,6 +116,13 @@
 .star 
   width: 100px
 
+.fireworks
+  width: 400px
+  height: 400px
+  position: absolute
+  &-right
+    right: 0px
+
 .slide
   &-content
     &-up
@@ -140,6 +149,7 @@
 
 <script>
 import ShiftedText from 'Components/ShiftedText.vue'
+import { Fireworks } from 'fireworks-js'
 
 export default {
   name: 'Rating',
@@ -183,8 +193,68 @@ export default {
           this.showBackground = true;
           this.showScreen = true;
           this.showContent = true;
+          setTimeout(function() {
+            this.fireworks = new Fireworks({
+              target: document.querySelector('.fireworks-left'),
+              hue: 120,
+              startDelay: 1,
+              minDelay: 30,
+              maxDelay: 40,
+              speed: 5,
+              acceleration: 1.15,
+              friction: 0.88,
+              gravity: 1,
+              particles: 65,
+              trace: 3,
+              explosion: 6,
+              boundaries: {
+                top: 70,
+                bottom: 400,
+                left: 70,
+                right: 400
+              },
+              sound: {
+                enable: false,
+              }
+            })
+            this.fireworks.start()
+
+                        this.fireworks1 = new Fireworks({
+              target: document.querySelector('.fireworks-right'),
+              hue: 120,
+              startDelay: 1,
+              minDelay: 30,
+              maxDelay: 40,
+              speed: 5,
+              acceleration: 1.15,
+              friction: 0.88,
+              gravity: 1,
+              particles: 65,
+              trace: 3,
+              explosion: 6,
+              boundaries: {
+                top: 70,
+                bottom: 400,
+                left: 70,
+                right: 400
+              },
+              sound: {
+                enable: false,
+              }
+            })
+            this.fireworks1.start()
+          }, 10, this)
+          
+          
         }
         else {
+          if(this.fireworks) {
+            this.fireworks.stop()
+            this.fireworks.clear()
+            this.fireworks1.stop()
+            this.fireworks1.clear()
+          }
+
           setTimeout(() => this.showScreen = false, 1000)
         }
       }

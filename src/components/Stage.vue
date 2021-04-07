@@ -39,6 +39,7 @@
     font-size: 3.5em
     font-family: Sensei
     color: hsl(0, 100%, 67%)
+    text-shadow: 0px 0px 5px black
   &__question
     margin-top: -70px
     fill: hsl(0, 100%, 54%)
@@ -93,6 +94,7 @@
 <script>
 import Answer from 'Components/Answer.vue'
 import ShiftedText from 'Components/ShiftedText.vue'
+
 
 export default {
   name: 'Stage',
@@ -186,7 +188,6 @@ export default {
       this.nextQuestion()
     },
     gameOver() {
-      console.log(2)
       this.showContent = false;
       this.showBackground = false;
       this.$emit('game-over');

@@ -1,7 +1,7 @@
 export default {
   name: 'solar-system',
   title: 'Солнечная система',
-  background: require('./background.jpeg'),
+  background: require('./background.jpg'),
   miniature: require('./miniature.png'),
   questions: [
     {
