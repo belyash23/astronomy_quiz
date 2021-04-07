@@ -6,13 +6,13 @@
     <transition name="slide-content-up">
       <div class="rating__stars" v-if="showContent">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -14 28 28" class="star">
-          <path d="m 0 -10 L 3 -2 L 10 -2 L 4 2 L 7 10 L 0 5 L -7 10 L -4 2 L -10 -2 L -3 -2 Z" stroke="#ffffff" stroke-width="1" fill="#fabc4a" filter="url(#shadow)"/>
+          <path d="m 0 -10 L 3 -2 L 10 -2 L 4 2 L 7 10 L 0 5 L -7 10 L -4 2 L -10 -2 L -3 -2 Z" stroke="#ffffff" stroke-width="1" :fill="starFillColor(1)" filter="url(#shadow)"/>
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -14 28 28" class="star">
-          <path d="m 0 -10 L 3 -2 L 10 -2 L 4 2 L 7 10 L 0 5 L -7 10 L -4 2 L -10 -2 L -3 -2 Z" stroke="#ffffff" stroke-width="1" fill="#fabc4a" filter="url(#shadow)"/>
+          <path d="m 0 -10 L 3 -2 L 10 -2 L 4 2 L 7 10 L 0 5 L -7 10 L -4 2 L -10 -2 L -3 -2 Z" stroke="#ffffff" stroke-width="1" :fill="starFillColor(2)" filter="url(#shadow)"/>
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -14 28 28" class="star">
-          <path d="m 0 -10 L 3 -2 L 10 -2 L 4 2 L 7 10 L 0 5 L -7 10 L -4 2 L -10 -2 L -3 -2 Z" stroke="#ffffff" stroke-width="1" fill="#fabc4a" filter="url(#shadow)"/>
+          <path d="m 0 -10 L 3 -2 L 10 -2 L 4 2 L 7 10 L 0 5 L -7 10 L -4 2 L -10 -2 L -3 -2 Z" stroke="#ffffff" stroke-width="1" :fill="starFillColor(3)" filter="url(#shadow)"/>
         </svg>
         <svg>
           <filter id="shadow" width="200%" height="200%">
@@ -54,7 +54,6 @@
 
 <style scoped lang="sass">
 .rating
-  position: relative
   &__stars
     position: relative
     z-index: 0
@@ -148,7 +147,8 @@ export default {
     return {
       showContent: false,
       showScreen: false,
-      showBackground: false
+      showBackground: false,
+      starsAmount: 0
     }
   },
   props: {
@@ -158,6 +158,12 @@ export default {
   },
   emits: ['end-game', 'restart'],
   methods: {
+    starFillColor(starNum) {
+      if(starNum == 1) return '#fabc4a'
+      else if(starNum == 2 && this.starsAmount >= 2) return '#fabc4a'
+      else if(starNum == 3 && this.starsAmount == 3) return '#fabc4a'
+      else return 'transparent'
+    },
     endGame() {
       this.showContent = false;
       this.showBackgrond = false;
@@ -182,6 +188,11 @@ export default {
           setTimeout(() => this.showScreen = false, 1000)
         }
       }
+    },
+    score() {
+      if(this.score <= 7) this.starsAmount = 1
+      else if(this.score <= 14) this.starsAmount = 2
+      else this.starsAmount = 3
     }
   },
   components: {
