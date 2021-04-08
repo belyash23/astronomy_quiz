@@ -24,12 +24,10 @@
     height: 100%
     float: left
   &__text
-    font-size: 1.7em
+    font-size: 2em
     color: hsl(0deg, 0%, 100%)
-    text-shadow: 2px 2px #000000
+    text-shadow: 0px 0px 10px #000000
     font-family: Capsmall
-    hyphens: auto
-    word-wrap: break-word
     height: 90%
     text-align: center
     &:before

@@ -81,7 +81,7 @@
   &__score
     font-family: Capsmall
     font-size: 3em
-    text-shadow: 2px 2px hsl(0, 0%, 0%)
+    text-shadow: 0px 0px 10px hsl(0, 0%, 0%)
     color: hsl(0, 0%, 100%)
     margin: 50px auto
     max-width: 800px

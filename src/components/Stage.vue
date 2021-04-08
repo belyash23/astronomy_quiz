@@ -39,13 +39,14 @@
     font-size: 3.5em
     font-family: Sensei
     color: hsl(0, 100%, 67%)
-    text-shadow: 0px 0px 5px black
+    text-shadow: 0px 0px 10px black
   &__question-container
-    color: hsl(0, 100%, 54%)
+    // color: hsl(0, 100%, 54%)
+    color: hsl(186, 100%, 54%)
     z-index: 1
     position: relative
     font-size: 3em
-    text-shadow: 1px 1px 5px black
+    text-shadow: 0px 0px 10px black
     font-family: Sensei
     width: 100vw
     text-align: center

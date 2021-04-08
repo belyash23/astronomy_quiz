@@ -67,7 +67,7 @@ export default {
           correct: false
         },
         {
-          answer: 'Раньше-да, тепеь-нет.',
+          answer: 'Раньше-да, теперь-нет.',
           correct: false
         },
         {
