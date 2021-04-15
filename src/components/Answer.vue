@@ -1,6 +1,6 @@
 <template>
   <button class="answer" @click="sendAnswer" :style="{backgroundImage: `url('${backgroundImage}')`}">
-    <div class="answer__text"><p>{{answer.answer}}</p></div>
+    <div class="answer__text"><p v-html="answer.answer"></p></div>
   </button>
 </template>
 
