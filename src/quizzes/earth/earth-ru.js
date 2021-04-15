@@ -99,15 +99,15 @@ export default {
       difficult: 2,
       answers: [
         {
-          answer: '7 * 1020 кг',
+          answer: '7 * 10<sup>20</sup> кг',
           correct: false
         },
         {
-          answer: '4 * 1030 кг',
+          answer: '4 * 10<sup>30</sup> кг',
           correct: false
         },
         {
-          answer: '6 * 1024 кг',
+          answer: '6 * 10<sup>24</sup> кг',
           correct: true
         }
       ] 
@@ -171,15 +171,15 @@ export default {
       difficult: 2,
       answers: [
         {
-          answer: '5200 кг/см3',
+          answer: '5200 кг/см<sup>3</sup>',
           correct: false
         },
         {
-          answer: '5520 кг/см3',
+          answer: '5520 кг/см<sup>3</sup>',
           correct: true
         },
         {
-          answer: '6120 кг/см3',
+          answer: '6120 кг/см<sup>3</sup>',
           correct: false
         }
       ] 
@@ -211,7 +211,7 @@ export default {
           correct: true
         },
         {
-          answer: '8 -12 км',
+          answer: '8 - 12 км',
           correct: false
         },
         {
